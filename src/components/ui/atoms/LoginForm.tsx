@@ -1,7 +1,27 @@
+"use client"
+
+import axios from "axios"
 import Link from "next/link"
+import { useState } from "react"
 import { FaGithub, FaGoogle } from "react-icons/fa"
 
 const LoginForm: React.FC = () => {
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  })
+
+  const handleChange = (event: any) => {
+    setForm({ ...form, [event.target.name]: event.target.value })
+  }
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    axios.post(
+      "https://sandbox-backend-0f2e.onrender.com/api/auth/signin",
+      form,
+    )
+  }
+
   return (
     <div className="flex h-full w-screen items-center justify-center">
       <div className="flex min-h-full flex-1 flex-col justify-center px-4 py-8 lg:px-6">
@@ -12,7 +32,12 @@ const LoginForm: React.FC = () => {
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-xs">
-          <form className="space-y-4" action="#" method="POST">
+          <form
+            className="space-y-4"
+            action="#"
+            method="POST"
+            onSubmit={handleSubmit}
+          >
             <div>
               <label
                 htmlFor="email"
@@ -24,6 +49,8 @@ const LoginForm: React.FC = () => {
                 <input
                   id="email"
                   name="email"
+                  value={form.email}
+                  onChange={handleChange}
                   type="email"
                   autoComplete="email"
                   required
@@ -53,6 +80,8 @@ const LoginForm: React.FC = () => {
                 <input
                   id="password"
                   name="password"
+                  value={form.password}
+                  onChange={handleChange}
                   type="password"
                   autoComplete="current-password"
                   required
@@ -63,12 +92,12 @@ const LoginForm: React.FC = () => {
 
             <div>
               <Link href="/details">
-                <button
-                  type="submit"
-                  className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1 text-sm font-semibold leading-5 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                >
-                  Sign In
-                </button>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1 text-sm font-semibold leading-5 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+              >
+                Sign In
+              </button>
               </Link>
             </div>
           </form>

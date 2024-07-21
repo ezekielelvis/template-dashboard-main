@@ -117,7 +117,7 @@ const PeopleList = async() => {
                 </div>
               </div>
               <div className="m-5 flex items-center">
-                <a href={`/overview/${overivewId}`} className="text-blue-500 hover:text-blue-700">
+                <a href={`/details/${overivewId}/overview`} className="text-blue-500 hover:text-blue-700">
                   <FaArrowRight />
                 </a>
               </div>

@@ -3,8 +3,10 @@
 import { Dialog, DialogPanel } from "@headlessui/react"
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
 import Image from "next/image"
-import { useState } from "react"
+import { createContext, useState } from "react"
 import logo from "../../public/Exclude.svg"
+import { useRouter } from "next/router"
+import LoginForm from "@/components/ui/atoms/LoginForm"
 
 const navigation = [
   { name: "Product", href: "/Product" },
@@ -12,10 +14,12 @@ const navigation = [
   { name: "Team", href: "/company" },
 ]
 
+
+
 const Example = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
-
   return (
+    <>
     <div className="flex h-screen w-screen flex-col overflow-hidden bg-white">
       <header className="absolute inset-x-0 top-0 z-50">
         <nav
@@ -174,6 +178,7 @@ const Example = () => {
         </div>
       </main>
     </div>
+    </>
   )
 }
 

@@ -1,7 +1,36 @@
+'use client'
+
+import axios from "axios"
 import Link from "next/link"
+import { useState } from "react"
 import { FaGithub, FaGoogle } from "react-icons/fa"
+import { useRouter } from "next/router"
 
 const SignupForm: React.FC = () => {
+
+
+  const [newAccount, setNewAccount] = useState({
+    username: "",
+    email: "",
+    password: ""
+  })
+
+  // const router = useRouter();
+
+  const handleChange = (event: any) => {
+    setNewAccount({...newAccount, [event.target.name]: event.target.value })
+  }
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    try{
+      const response = await axios.post("https://sandbox-backend-0f2e.onrender.com/api/auth/signup", newAccount).then(res => console.log(res.data))
+    }catch{
+      console.error(Error)
+    }
+
+  }
   return (
     <div className="flex h-full w-screen items-center justify-center">
       <div className="flex min-h-full flex-1 flex-col justify-center px-4 py-8 lg:px-6">
@@ -12,7 +41,7 @@ const SignupForm: React.FC = () => {
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-xs">
-          <form className="space-y-4" action="#" method="POST">
+          <form className="space-y-4" action="#" method="POST" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="username"
@@ -24,6 +53,8 @@ const SignupForm: React.FC = () => {
                 <input
                   id="username"
                   name="username"
+                  value={newAccount.username}
+                  onChange={handleChange}
                   required
                   className="block w-full rounded-md border-0 px-2 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-5"
                 />
@@ -40,6 +71,8 @@ const SignupForm: React.FC = () => {
                 <input
                   id="email"
                   name="email"
+                  value={newAccount.email}
+                  onChange={handleChange}
                   type="email"
                   autoComplete="email"
                   required
@@ -61,6 +94,8 @@ const SignupForm: React.FC = () => {
                 <input
                   id="password"
                   name="password"
+                  value={newAccount.password}
+                  onChange={handleChange}
                   type="password"
                   autoComplete="current-password"
                   required
@@ -70,7 +105,7 @@ const SignupForm: React.FC = () => {
             </div>
 
             <div>
-              <Link href="/details">
+              {/* <Link href="/details"> */}
 
              
               <button
@@ -79,7 +114,7 @@ const SignupForm: React.FC = () => {
               >
                 Sign Up
               </button>
-              </Link>
+              {/* </Link> */}
             </div>
           </form>
 

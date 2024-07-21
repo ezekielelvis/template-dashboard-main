@@ -8,6 +8,7 @@ export const siteConfig = {
     details: "/details",
     settings: "/settings",
     projectId: "/details/:projectId",
+    projectOverview: "/details/:projectId/overview"
   },
 }
 

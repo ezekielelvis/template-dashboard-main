@@ -1,0 +1,1 @@
+export const SIGN_UP_ENDPOINT = process.env.NEXT_PUBLIC_END_POINT_BASE_URL
